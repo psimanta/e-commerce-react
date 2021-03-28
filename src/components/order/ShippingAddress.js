@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Layout from '../Layout';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { getProfile, updateProfile } from '../../api/apiOrder';
 import { userInfo } from '../../utils/auth';
 
-const ShippingAddress = () => {
+const ShippingAddress = ({ history }) => {
     const [values, setValues] = useState({
         phone: '',
         address1: '',
@@ -80,6 +80,7 @@ const ShippingAddress = () => {
 
     return (<>
         <Layout title="Checkout" description="Complete your order!" className="container">
+            {redirect ? history.push('/checkout') : ""}
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><Link href="#">Order</Link></li>
@@ -103,4 +104,4 @@ const ShippingAddress = () => {
     </>);
 }
 
-export default ShippingAddress;
+export default withRouter(ShippingAddress);
